@@ -75,8 +75,8 @@ BallHit = function() {
     var lowX = Math.min(clickedX, releaseX);
     var lowY = Math.min(clickedY, releaseY);
 
-    var Xspeed = (highX - lowX) / 3;
-    var Yspeed = (highY - lowY) / 3;
+    var Xspeed = ((highX - lowX) / 3) > 10 ? 10 : (highX - lowX) / 3;
+    var Yspeed = ((highY - lowY) / 3) > 10 ? 10 : (highY - lowY) / 3;
 
     if (releaseX > clickedX) {
         gameBall.addXVel(-Xspeed);
