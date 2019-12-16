@@ -26,9 +26,10 @@ $("document").ready(function() {
 
     objs.push(new PhysObj(10, 10, 10, 10));
 
-    levelObjs.push(new SolidObj(5, 5, 5, 45));
-    levelObjs.push(new SolidObj(5, 5, 45, 5));
-    levelObjs.push(new SolidObj(5, 50, 100, 5));
+    levelObjs.push(new SolidObj(5, 5, 5, 100));
+    levelObjs.push(new SolidObj(5, 5, 75, 5));
+    levelObjs.push(new SolidObj(5, 80, 5, 100));
+    levelObjs.push(new SolidObj(105, 5, 80, 5));
 
     FrameRenderLoop(50);
 });
@@ -37,11 +38,11 @@ FrameRender = function() {
 
     requestAnimationFrame(FrameRender);
 
-    now = Date.now();
-    elapsed = now - then
+    //now = Date.now();
+    //elapsed = now - then
 
-    if (elapsed > fpsInterval) {
-        then = now - (elapsed % fpsInterval);
+    //if (elapsed > fpsInterval) {
+    //    then = now - (elapsed % fpsInterval);
 
 
     context.clearRect(0, 0, width, height);
@@ -60,11 +61,11 @@ FrameRender = function() {
             context.fillRect(
                 levelObjs[i].x,
                 levelObjs[i].y,
-                levelObjs[i].height,
-                levelObjs[i].width
+                levelObjs[i].width,
+                levelObjs[i].height
             );
         }
-    }
+    //} 
 }
 
 FrameRenderLoop = function(frameRate) {
@@ -74,6 +75,19 @@ FrameRenderLoop = function(frameRate) {
     startTime = then;
     
     FrameRender();
+}
+
+ColliderCheck = function(ball, wall) {
+    
+    var ballX = Math.round(ball.x);
+    var ballY = Math.round(ball.y);
+
+    if (ballX > wall.x && ballX < wall.x + wall.width && ballY > wall.y && ballY < wall.y + wall.height) {
+        console.log("collision");
+        ball.xVel = -ball.xVel;
+        ball.yVel = -ball.yVel;
+    }
+
 }
 
 var PhysObj = function(x, y, w, h) {
@@ -93,25 +107,32 @@ var PhysObj = function(x, y, w, h) {
         this.yVel += vel;
     }
 
+    this.addXYVel = function(xVel, yVel) {
+        this.xVel += xVel;
+        this.yVel = yVel;
+    }
+
     this.nextFrame = function() {
         this.x += this.xVel;
         this.y += this.yVel;
 
-        if (this.xVel > 0.1) {
+        for (var i = 0; i < levelObjs.length; i++) {
+            ColliderCheck(this, levelObjs[i]);
+        }
+
+        if (this.xVel > 0.1 || this.xVel < -0.1) {
             this.xVel = (this.xVel * 0.9);
         }
         else {
             this.xVel = 0;
         }
 
-        if (this.yVel > 0.1) {
+        if (this.yVel > 0.1 || this.yVel < -0.1) {
             this.yVel = (this.yVel * 0.9);
         }
         else {
             this.yVel = 0;
         }
-
-        console.log("X = " + this.xVel + "; Y = " + this.yVel);
     }
 }
 
