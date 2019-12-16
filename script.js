@@ -10,6 +10,11 @@ var fpsInterval;
 var then;
 var startTime;
 
+var clickedX;
+var clickedY;
+var releaseX;
+var releaseY;
+
 var collision = false;
 
 $("document").ready(function() {
@@ -24,6 +29,31 @@ $("document").ready(function() {
 
     $("body").append(canvas);
 
+    $("#mainCanvas").mousedown(function(event) {
+        var localclickedX = event.originalEvent.clientX;
+        var localclickedY = event.originalEvent.clientY;
+
+        if ((localclickedX >= gameBall.x - (gameBall.rad * 2)) && (localclickedX <= gameBall.x + (gameBall.rad * 2))
+        && (localclickedY >= gameBall.y - (gameBall.rad * 2)) && (localclickedY <= gameBall.y + (gameBall.rad * 2))) {
+            clickedX = localclickedX;
+            clickedY = localclickedY;
+            document.body.style.cursor = "crosshair";
+        } else {
+            clickedX = null;
+            clickedY = null;
+        }
+    });
+
+    $("#mainCanvas").mouseup(function(event) {
+        if (clickedX != null && clickedY != null) {
+            releaseX = event.originalEvent.clientX;
+            releaseY = event.originalEvent.clientY;
+            BallHit();
+        }
+
+        document.body.style.cursor = "default";
+    });
+
     context = canvas.getContext("2d");
 
     gameBall = new CircleObj(50, 75, 5);
@@ -37,6 +67,34 @@ $("document").ready(function() {
 
     FrameRenderLoop(50);
 });
+
+BallHit = function() {
+
+    var highX = Math.max(clickedX, releaseX);
+    var highY = Math.max(clickedY, releaseY);
+    var lowX = Math.min(clickedX, releaseX);
+    var lowY = Math.min(clickedY, releaseY);
+
+    var Xspeed = (highX - lowX) / 3;
+    var Yspeed = (highY - lowY) / 3;
+
+    if (releaseX > clickedX) {
+        gameBall.addXVel(-Xspeed);
+    } else if (releaseX < clickedX) {
+        gameBall.addXVel(Xspeed);
+    }
+
+    if (releaseY > clickedY) {
+        gameBall.addYVel(-Yspeed);
+    } else if (releaseY < clickedY) {
+        gameBall.addYVel(Yspeed);
+    }
+
+    releaseX = null;
+    releaseY = null;
+    clickedX = null;
+    clickedY = null;
+}
 
 FrameRender = function() {
 
