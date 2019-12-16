@@ -33,6 +33,7 @@ $("document").ready(function() {
     levelObjs.push(new SolidObj(5, 155, 5, 300));
     levelObjs.push(new SolidObj(305, 5, 155, 5));
     levelObjs.push(new SolidObj(150, 50, 50, 5));
+    levelObjs.push(new SolidObj(15, 74, 5, 16));
 
     FrameRenderLoop(50);
 });
@@ -107,7 +108,11 @@ ColliderCheck = function(ball, wall) {
         }
 
         console.log("Deg: " + deg + "Side: " + side);
-        if ((deg > 0 && deg < 90) && side === "right") {
+        if (deg === 0 || deg === 180) {
+            ball.yVel = -ball.yVel;
+        } else if (deg === -90 || deg === 90) {
+            ball.xVel = -ball.xVel;
+        } else if ((deg > 0 && deg < 90) && side === "right") {
             ball.xVel = -ball.xVel;
         } else if ((deg > 0 && deg < 90) && side === "bottom") {
             ball.yVel = -ball.yVel;
