@@ -1,75 +1,4 @@
-var context;
-var width;
-var height;
-var start;
-var gameBall;
-var hole;
-const levelObjs = [];
-
-var elapsed
-var fpsInterval;
-var then;
-var startTime;
-
-var clickedX;
-var clickedY;
-var releaseX;
-var releaseY;
-
-$("document").ready(function() {
-
-    width = window.innerWidth || window.document.documentElement.clientWidth || window.document.documentElement.getElementsByTagName('body')[0].clientWidth;
-    height = window.innerHeight || window.document.documentElement.clientHeight || window.document.documentElement.getElementsByTagName('body')[0].clientHeight;
-
-    var canvas = document.createElement("canvas");
-    canvas.id = "mainCanvas";
-    canvas.height = height;
-    canvas.width = width;
-
-    $("body").append(canvas);
-
-    $("#mainCanvas").mousedown(function(event) {
-        var localclickedX = event.originalEvent.clientX;
-        var localclickedY = event.originalEvent.clientY;
-
-        if ((localclickedX >= gameBall.x - (gameBall.rad * 2)) && (localclickedX <= gameBall.x + (gameBall.rad * 2))
-        && (localclickedY >= gameBall.y - (gameBall.rad * 2)) && (localclickedY <= gameBall.y + (gameBall.rad * 2))) {
-            clickedX = localclickedX;
-            clickedY = localclickedY;
-            document.body.style.cursor = "crosshair";
-        } else {
-            clickedX = null;
-            clickedY = null;
-        }
-    });
-
-    $("#mainCanvas").mouseup(function(event) {
-        if (clickedX != null && clickedY != null) {
-            releaseX = event.originalEvent.clientX;
-            releaseY = event.originalEvent.clientY;
-            BallHit();
-        }
-
-        document.body.style.cursor = "default";
-    });
-
-    context = canvas.getContext("2d");
-
-    gameBall = new CircleObj(295, 75, 5, false);
-    hole = new CircleObj(500, 75, 5.5, true);
-
-    levelObjs.push(new SolidObj(250, 5, 5, 300));
-    levelObjs.push(new SolidObj(250, 5, 150, 5));
-    levelObjs.push(new SolidObj(250, 155, 5, 300));
-    levelObjs.push(new SolidObj(305+245, 5, 155, 5));
-    levelObjs.push(new SolidObj(150+245, 50, 50, 5));
-    levelObjs.push(new SolidObj(15+245, 74, 5, 16));
-    levelObjs.push(hole);
-
-    FrameRenderLoop(50);
-});
-
-BallHit = function() {
+function BallHit(clickedX, releaseX, clickedY, releaseY) {
 
     var highX = Math.max(clickedX, releaseX);
     var highY = Math.max(clickedY, releaseY);
@@ -90,64 +19,6 @@ BallHit = function() {
     } else if (releaseY < clickedY) {
         gameBall.addYVel(Yspeed);
     }
-
-    releaseX = null;
-    releaseY = null;
-    clickedX = null;
-    clickedY = null;
-}
-
-FrameRender = function() {
-
-    requestAnimationFrame(FrameRender);
-
-    now = Date.now();
-    elapsed = now - then
-
-    if (elapsed > fpsInterval) {
-        then = now - (elapsed % fpsInterval);
-
-
-    context.clearRect(0, 0, width, height);
-    
-    context.beginPath();
-
-    context.arc(
-                gameBall.x,
-                gameBall.y,
-                gameBall.rad,
-                gameBall.sAngle,
-                gameBall.eAngle
-            );
-            gameBall.nextFrame();
-            
-    context.arc(
-        hole.x,
-        hole.y,
-        hole.rad,
-        hole.sAngle,
-        hole.eAngle
-    );
-    context.fill();
-    
-        for (var i = 0; i < levelObjs.length; i++) {
-            context.fillRect(
-                levelObjs[i].x,
-                levelObjs[i].y,
-                levelObjs[i].width,
-                levelObjs[i].height
-            );
-        }
-    } 
-}
-
-FrameRenderLoop = function(frameRate) {
-
-    fpsInterval = 1000 / frameRate;
-    then = Date.now();
-    startTime = then;
-    
-    FrameRender();
 }
 
 ColliderCheck = function(ball, obj) {
@@ -196,16 +67,14 @@ ColliderCheck = function(ball, obj) {
             ball.xVel = -ball.xVel;
         }
     }
-
 }
 
-var CircleObj = function(x, y, r, isHole) {
+var CircleObj = function(x, y, r) {
     this.x = x,
     this.y = y;
     this.rad = r;
     this.sAngle = 0;
     this.eAngle = 360
-    this.isHole = isHole;
 
     this.xVel = 0;
     this.yVel = 0;
@@ -227,8 +96,8 @@ var CircleObj = function(x, y, r, isHole) {
         this.x += this.xVel;
         this.y += this.yVel;
 
-        for (var i = 0; i < levelObjs.length; i++) {
-                ColliderCheck(this, levelObjs[i]);
+        for (var i = 0; i < level.length; i++) {
+                ColliderCheck(this, level[i]);
             }   
 
         if (this.xVel > 0.1 || this.xVel < -0.1) {
@@ -275,8 +144,8 @@ var PhysObj = function(x, y, w, h) {
         this.x += this.xVel;
         this.y += this.yVel;
 
-        for (var i = 0; i < levelObjs.length; i++) {
-                ColliderCheck(this, levelObjs[i]);
+        for (var i = 0; i < level.length; i++) {
+                ColliderCheck(this, level[i]);
             }
 
         if (this.xVel > 0.1 || this.xVel < -0.1) {
