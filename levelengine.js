@@ -48,3 +48,26 @@ function Draw(objects, gameBall, hole) {
         );
     });
 }
+
+function WinCondition(gameBall, hole) {
+    
+    var gameBallXRight = Math.round(gameBall.x) + gameBall.rad;
+    var gameBallXLeft = Math.round(gameBall.x) - gameBall.rad;
+    var gameBallYBottom = Math.round(gameBall.y) + gameBall.rad;
+    var gameBallYTop = Math.round(gameBall.y) - gameBall.rad;
+
+    var holeXRight = Math.round(hole.x) + hole.rad;
+    var holeXLeft = Math.round(hole.x) - hole.rad;
+    var holeYBottom = Math.round(hole.y) + hole.rad;
+    var holeYTop = Math.round(hole.y) - hole.rad;
+
+    if (gameBallXRight > holeXLeft && gameBallXLeft < holeXRight && gameBallYBottom < holeYBottom && gameBallYTop > holeYTop) {
+        
+        let levelNum = parseInt(localStorage.getItem("level")) + 1;
+        console.log(levelNum);
+        swal("Congratulations!", "You cleared the level!", "success").then(() => {
+            localStorage.setItem("level", levelNum);
+            location.reload();
+        });
+    }
+}

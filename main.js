@@ -1,5 +1,5 @@
-var gameBall;
 var hole;
+var gameBall;
 var level = [];
 
 var elapsed
@@ -14,14 +14,14 @@ var releaseY;
 
 $("document").ready(function() {
 
-    include("physicsengine.js");
-    include("levelengine.js");
-    include("Levels/level_1.js");
+    include("physicsengine.js", "physeng");
+    include("levelengine.js", "leveleng");
+    if (localStorage.getItem("level") === null) {
+        localStorage.setItem("level", 1);
+    }
+    include("Levels/level_" + localStorage.getItem("level") + ".js", "level");
 
     InitContext();
-
-    gameBall = new CircleObj(295, 75, 5, false);
-    hole = new CircleObj(500, 75, 5.5, true);
 
     level = InitLevel();
 
@@ -78,10 +78,11 @@ FrameRenderLoop = function(frameRate) {
     FrameRender();
 }
 
-function include(file) {
+function include(file, id) {
     var script = $("<script></script>");
     script.attr("src", file)
     script.attr("type", "text/javascript");
+    script.attr("id", id)
 
     $("head").append(script);
 }

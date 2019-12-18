@@ -98,7 +98,8 @@ var CircleObj = function(x, y, r) {
 
         for (var i = 0; i < level.length; i++) {
                 ColliderCheck(this, level[i]);
-            }   
+            }
+            WinCondition(this, hole);
 
         if (this.xVel > 0.1 || this.xVel < -0.1) {
             this.xVel = (this.xVel * 0.9);
