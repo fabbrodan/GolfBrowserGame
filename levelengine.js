@@ -29,7 +29,6 @@ function Draw(objects, gameBall, hole) {
             gameBall.sAngle,
             gameBall.eAngle
         );
-            gameBall.nextFrame();
             
     context.arc(
             hole.x,

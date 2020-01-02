@@ -14,7 +14,7 @@ var releaseY;
 
 $("document").ready(function() {
 
-    include("physicsengine.js", "physeng");
+    //include("physicsengine.js", "physeng");
     include("levelengine.js", "leveleng");
     if (localStorage.getItem("level") === null) {
         localStorage.setItem("level", 1);
@@ -50,31 +50,18 @@ $("document").ready(function() {
         document.body.style.cursor = "default";
     });
 
-    FrameRenderLoop(50);
+    FrameRender();
 });
 
 
 
 FrameRender = function() {
-
+    gameBall.nextFrame();
+    Draw(level, gameBall, hole);
     requestAnimationFrame(FrameRender);
-
-    now = Date.now();
-    elapsed = now - then
-
-    if (elapsed > fpsInterval) {
-        then = now - (elapsed % fpsInterval);
-
-        Draw(level, gameBall, hole);
-    } 
 }
 
-FrameRenderLoop = function(frameRate) {
-
-    fpsInterval = 1000 / frameRate;
-    then = Date.now();
-    startTime = then;
-    
+FrameRenderLoop = function() {
     FrameRender();
 }
 

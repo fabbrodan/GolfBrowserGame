@@ -5,9 +5,10 @@ function BallHit(clickedX, releaseX, clickedY, releaseY) {
     var lowX = Math.min(clickedX, releaseX);
     var lowY = Math.min(clickedY, releaseY);
 
-    var Xspeed = ((highX - lowX) / 3) > 15 ? 15 : (highX - lowX) * 0.25;
-    var Yspeed = ((highY - lowY) / 3) > 15 ? 15 : (highY - lowY) * 0.25;
-
+    //var Xspeed = ((highX - lowX) / 3) > 15 ? 15 : (highX - lowX) * 0.25;
+    //var Yspeed = ((highY - lowY) / 3) > 15 ? 15 : (highY - lowY) * 0.25;
+    var Xspeed = ((highX - lowX) / 3)
+    var Yspeed = ((highY - lowY) / 3)
     if (releaseX > clickedX) {
         gameBall.addXVel(-Xspeed);
     } else if (releaseX < clickedX) {
@@ -19,16 +20,19 @@ function BallHit(clickedX, releaseX, clickedY, releaseY) {
     } else if (releaseY < clickedY) {
         gameBall.addYVel(Yspeed);
     }
+
+    PointCalculation(gameBall);
 }
 
-ColliderCheck = function(ball, obj) {
+function ColliderCheck (ball, obj) {
     
     var ballXRight = Math.round(ball.x) + ball.rad;
     var ballXLeft = Math.round(ball.x) - ball.rad;
     var ballYBottom = Math.round(ball.y) + ball.rad;
     var ballYTop = Math.round(ball.y) - ball.rad;
 
-    if (ballXRight > obj.x && ballXLeft < obj.x + obj.width && ballYBottom > obj.y && ballYTop < obj.y + obj.height) {
+    if (Math.min(ballXRight, ballXRight - ball.xVel) > obj.x && Math.min(ballXLeft, ballXLeft - ball.xVel) < obj.x + obj.width &&
+        Math.min(ballYBottom, ballYBottom - ball.yVel) > obj.y && Math.min(ballYTop, ballYTop - ball.yVel) < obj.y + obj.height) {
 
         var side;
 
@@ -172,4 +176,39 @@ var SolidObj = function(x, y, h, w) {
     this.y = y;
     this.height = h;
     this.width = w;
+}
+
+function PointCalculation (ball) {
+    var points = [];
+
+    var speedSteps = [];
+
+    var xSpeed = ball.xVel;
+    var ySpeed = ball.yVel;
+    var ballX = ball.x;
+    var ballY = ball.y;
+
+    while (xSpeed > 0 || ySpeed > 0) {
+        if (xSpeed > 0.1 || xSpeed < -0.1) {
+            xSpeed *= 0.9; }
+            else {
+                xSpeed = 0;
+            }
+
+        if (ySpeed > 0.1 || ySpeed < -0.1) {
+            ySpeed *= 0.9;}
+            else {
+                ySpeed = 0;
+            }
+        speedSteps.push({xSpeed, ySpeed});
+    }
+
+    $.each(speedSteps, function(index, element) {
+        ballX += element.xSpeed;
+        ballY += element.ySpeed;
+
+        points.push({ballX, ballY});
+    });
+
+    console.log(points);
 }
