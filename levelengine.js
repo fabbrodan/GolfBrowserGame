@@ -18,10 +18,21 @@ function InitContext() {
 
 function Draw(objects, gameBall, hole) {
 
+    // clear everything
     context.clearRect(0, 0, width, height);
     
-    context.beginPath();
+    // draw walls and obstacles
+    $.each(objects, function(index, object) {
+        context.fillRect(
+                object.x,
+                object.y,
+                object.width,
+                object.height
+            );
+        });
 
+    // draw the ball
+    context.beginPath();
     context.arc(
             gameBall.x,
             gameBall.y,
@@ -30,7 +41,11 @@ function Draw(objects, gameBall, hole) {
             gameBall.eAngle
         );
             gameBall.nextFrame();
-            
+            context.closePath();
+            context.fill();
+    
+    // draw the hole
+    context.beginPath();
     context.arc(
             hole.x,
             hole.y,
@@ -38,15 +53,9 @@ function Draw(objects, gameBall, hole) {
             hole.sAngle,
             hole.eAngle
         );
-    context.fill();
-    $.each(objects, function(index, object) {
-    context.fillRect(
-            object.x,
-            object.y,
-            object.width,
-            object.height
-        );
-    });
+        context.lineWidth = 2;
+        context.stroke();
+        context.closePath();
 }
 
 function WinCondition(gameBall, hole) {

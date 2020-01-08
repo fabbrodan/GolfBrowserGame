@@ -167,9 +167,9 @@ var PhysObj = function(x, y, w, h) {
     }
 }
 
-var SolidObj = function(x, y, h, w) {
+var SolidObj = function(x, y, w, h) {
     this.x = x;
     this.y = y;
-    this.height = h;
     this.width = w;
+    this.height = h;
 }

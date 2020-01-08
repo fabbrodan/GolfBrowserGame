@@ -2,15 +2,14 @@ var levelObjects = [];
 
 function InitLevel() {
     
-    gameBall = new CircleObj(295, 75, 5, false);
-    hole = new CircleObj(500, 75, 5.5, true);
+    gameBall = new CircleObj(445, 100, 5, false);
+    hole = new CircleObj(650, 100, 6, true);
 
-    levelObjects.push(new SolidObj(250, 5, 5, 300));
-    levelObjects.push(new SolidObj(250, 5, 150, 5));
-    levelObjects.push(new SolidObj(250, 155, 5, 300));
-    levelObjects.push(new SolidObj(305+245, 5, 155, 5));
-    levelObjects.push(new SolidObj(150+245, 50, 50, 5));
-    levelObjects.push(new SolidObj(15+245, 74, 5, 16));
+    levelObjects.push(new SolidObj(400, 25, 5, 150)); // left vertical
+    levelObjects.push(new SolidObj(400, 25, 300, 5)); // top horizontal
+    levelObjects.push(new SolidObj(400, 175, 300, 5)); //bottom horizontal
+    levelObjects.push(new SolidObj(700, 25, 5, 155)) // right vertical
+    levelObjects.push(new SolidObj(550, 75, 5, 50))
 
     return levelObjects;
 }
