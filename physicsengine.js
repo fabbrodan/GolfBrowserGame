@@ -19,6 +19,8 @@ function BallHit(clickedX, releaseX, clickedY, releaseY) {
     } else if (releaseY < clickedY) {
         gameBall.addYVel(Yspeed);
     }
+
+    lvlStrokes++;
 }
 
 ColliderCheck = function(ball, obj) {

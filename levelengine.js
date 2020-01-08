@@ -7,8 +7,8 @@ function InitContext() {
     width = window.innerWidth || window.document.documentElement.clientWidth || window.document.documentElement.getElementsByTagName('body')[0].clientWidth;
     height = window.innerHeight || window.document.documentElement.clientHeight || window.document.documentElement.getElementsByTagName('body')[0].clientHeight;
     var canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
+    canvas.width = width - (width * 0.25);
+    canvas.height = height - (height * 0.25);
 
     $("body").append(canvas);
 
@@ -56,6 +56,8 @@ function Draw(objects, gameBall, hole) {
         context.lineWidth = 2;
         context.stroke();
         context.closePath();
+
+        $("h1").text(lvlStrokes);
 }
 
 function WinCondition(gameBall, hole) {
@@ -72,10 +74,13 @@ function WinCondition(gameBall, hole) {
 
     if (gameBallXRight > holeXLeft && gameBallXLeft < holeXRight && gameBallYBottom < holeYBottom && gameBallYTop > holeYTop) {
         
+        cancelAnimationFrame(animationRequest);
+
         let levelNum = parseInt(localStorage.getItem("level")) + 1;
-        console.log(levelNum);
         swal("Congratulations!", "You cleared the level!", "success").then(() => {
             localStorage.setItem("level", levelNum);
+            let lvl = "Level_" + (levelNum - 1);
+            localStorage.setItem(lvl, lvlStrokes)
             location.reload();
         });
     }

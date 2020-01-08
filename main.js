@@ -12,16 +12,25 @@ var clickedY;
 var releaseX;
 var releaseY;
 
+var lvlStrokes = 0;
+
+var animationRequest;
+
 $("document").ready(function() {
 
     include("physicsengine.js", "physeng");
     include("levelengine.js", "leveleng");
+    include("scoresys.js", "scoresys");
     if (localStorage.getItem("level") === null) {
         localStorage.setItem("level", 1);
     }
     include("Levels/level_" + localStorage.getItem("level") + ".js", "level");
 
     InitContext();
+    var footer = $("<footer></footer>");
+    var counter = $("<h1></h1>");
+    footer.append(counter);
+    $("body").append(footer);
 
     level = InitLevel();
 
@@ -57,7 +66,7 @@ $("document").ready(function() {
 
 FrameRender = function() {
 
-    requestAnimationFrame(FrameRender);
+    animationRequest = requestAnimationFrame(FrameRender);
 
     now = Date.now();
     elapsed = now - then
