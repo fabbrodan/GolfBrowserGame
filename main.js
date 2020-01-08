@@ -19,7 +19,7 @@ var animationRequest;
 $("document").ready(function() {
 
     include("physicsengine.js", "physeng");
-    include("levelengine.js", "leveleng");
+    //include("levelengine.js", "leveleng");
     include("scoresys.js", "scoresys");
     if (localStorage.getItem("level") === null) {
         localStorage.setItem("level", 1);
@@ -30,7 +30,7 @@ $("document").ready(function() {
     var footer = $("<footer></footer>");
     var counter = $("<h1></h1>");
     footer.append(counter);
-    $("body").append(footer);
+    $("#scoreDiv").append(footer);
 
     level = InitLevel();
 

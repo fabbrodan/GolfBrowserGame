@@ -10,7 +10,7 @@ function InitContext() {
     canvas.width = width - (width * 0.25);
     canvas.height = height - (height * 0.25);
 
-    $("body").append(canvas);
+    $("#gameDiv").append(canvas);
 
     context = canvas.getContext("2d");
 }
@@ -77,11 +77,15 @@ function WinCondition(gameBall, hole) {
         cancelAnimationFrame(animationRequest);
 
         let levelNum = parseInt(localStorage.getItem("level")) + 1;
-        swal("Congratulations!", "You cleared the level!", "success").then(() => {
-            localStorage.setItem("level", levelNum);
-            let lvl = "Level_" + (levelNum - 1);
-            localStorage.setItem(lvl, lvlStrokes)
-            location.reload();
-        });
+        if (levelNum <= 3) {
+            swal("Congratulations!", "You cleared the level!", "success").then(() => {
+                let lvl = "Level_" + (levelNum - 1);
+                localStorage.setItem(lvl, lvlStrokes)
+                localStorage.setItem("level", levelNum);
+                location.reload();
+            });
+        } else {
+            location = "highscore.html";
+        }
     }
 }
