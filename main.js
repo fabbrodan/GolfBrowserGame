@@ -16,16 +16,23 @@ var lvlStrokes = 0;
 
 var animationRequest;
 
+var highScores;
+
 $("document").ready(function() {
 
     include("physicsengine.js", "physeng");
     //include("levelengine.js", "leveleng");
-    include("scoresys.js", "scoresys");
+    //include("scoresys.js", "scoresys");
     if (localStorage.getItem("level") === null) {
         localStorage.setItem("level", 1);
     }
     include("Levels/level_" + localStorage.getItem("level") + ".js", "level");
 
+    highScores = GetHighScores();
+    $.each(highScores, function(index, object) {
+        var row = $("<p></p>").text(object.name + " - " + object.score);
+        $("#scoreDiv").append(row);
+    });
     InitContext();
     var footer = $("<footer></footer>");
     var counter = $("<h1></h1>");
@@ -61,10 +68,18 @@ $("document").ready(function() {
         document.body.style.cursor = "default";
     });
 
+    /* TRYING TO SETUP TOUCH DEVICES
+    canvas.addEventListener("touchstart", function(event) {
+        console.log(event.touches[0].clientX + " " + event.touches[0].clientY);
+    });
+
+    canvas.addEventListener("touchend", function(event) {
+        console.log(event.changedTouches[0].pageX);
+    });
+    */
+
     FrameRenderLoop(50);
 });
-
-
 
 FrameRender = function() {
 

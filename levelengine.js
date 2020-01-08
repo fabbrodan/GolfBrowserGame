@@ -1,14 +1,19 @@
 var context;
+var canvas
 var width;
 var height;
 
 function InitContext() {
 
-    width = window.innerWidth || window.document.documentElement.clientWidth || window.document.documentElement.getElementsByTagName('body')[0].clientWidth;
-    height = window.innerHeight || window.document.documentElement.clientHeight || window.document.documentElement.getElementsByTagName('body')[0].clientHeight;
-    var canvas = document.createElement("canvas");
-    canvas.width = width - (width * 0.25);
-    canvas.height = height - (height * 0.25);
+    //width = window.innerWidth || window.document.documentElement.clientWidth || window.document.documentElement.getElementsByTagName('body')[0].clientWidth * 0.25;
+    //height = window.innerHeight || window.document.documentElement.clientHeight || window.document.documentElement.getElementsByTagName('body')[0].clientHeight * 0.25;
+
+    width = window.innerWidth * 0.80;
+    height = window.innerHeight * 0.80;
+
+    canvas = document.createElement("canvas");
+    canvas.width = width ;
+    canvas.height = height;
 
     $("#gameDiv").append(canvas);
 
@@ -21,6 +26,13 @@ function Draw(objects, gameBall, hole) {
     // clear everything
     context.clearRect(0, 0, width, height);
     
+    $.each(backgrounds, function(index, background) {
+        context.fillStyle="green";
+        context.fillRect(background.X, background.Y, background.W, background.H);
+    });
+
+    context.fillStyle = "black";
+
     // draw walls and obstacles
     $.each(objects, function(index, object) {
         context.fillRect(
@@ -33,6 +45,7 @@ function Draw(objects, gameBall, hole) {
 
     // draw the ball
     context.beginPath();
+    context.fillStyle = "white";
     context.arc(
             gameBall.x,
             gameBall.y,
@@ -46,6 +59,7 @@ function Draw(objects, gameBall, hole) {
     
     // draw the hole
     context.beginPath();
+    context.fillStyle = "black";
     context.arc(
             hole.x,
             hole.y,
@@ -84,9 +98,15 @@ function WinCondition(gameBall, hole) {
         // Check for the last level
         if (levelNum <= 3) {
             swal("Congratulations!", "You cleared the level!", "success").then(() => {
-                // move on to next level
-                let lvl = "Level_" + (levelNum - 1);
-                localStorage.setItem(lvl, lvlStrokes)
+                // move on to next level and update total strokes
+                if (localStorage.getItem("strokes") == null) {
+                    localStorage.setItem("strokes", lvlStrokes);
+                }
+                else {
+                    var totalstrokes = parseInt(localStorage.getItem("strokes"));
+                    totalstrokes += lvlStrokes;
+                    localStorage.setItem("strokes", totalstrokes)
+                }
                 localStorage.setItem("level", levelNum);
                 location.reload();
             });
