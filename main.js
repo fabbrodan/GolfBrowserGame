@@ -34,6 +34,7 @@ $("document").ready(function() {
 
     level = InitLevel();
 
+    // define the initial points for force calculation
     $("canvas").mousedown(function(event) {
         var localclickedX = event.originalEvent.clientX;
         var localclickedY = event.originalEvent.clientY;
@@ -49,6 +50,7 @@ $("document").ready(function() {
         }
     });
 
+    // define the end points for force calculation
     $("canvas").mouseup(function(event) {
         if (clickedX != null && clickedY != null) {
             releaseX = event.originalEvent.clientX;

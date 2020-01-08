@@ -1,13 +1,16 @@
 function BallHit(clickedX, releaseX, clickedY, releaseY) {
 
+    // find the higs and lows of X and Y positions of click
     var highX = Math.max(clickedX, releaseX);
     var highY = Math.max(clickedY, releaseY);
     var lowX = Math.min(clickedX, releaseX);
     var lowY = Math.min(clickedY, releaseY);
 
+    // set the X and Y speeds with a limit of 15
     var Xspeed = ((highX - lowX) / 3) > 15 ? 15 : (highX - lowX) * 0.25;
     var Yspeed = ((highY - lowY) / 3) > 15 ? 15 : (highY - lowY) * 0.25;
 
+    // switches for determining if the speed in both X and Y axis should be negative or positive
     if (releaseX > clickedX) {
         gameBall.addXVel(-Xspeed);
     } else if (releaseX < clickedX) {
@@ -20,22 +23,27 @@ function BallHit(clickedX, releaseX, clickedY, releaseY) {
         gameBall.addYVel(Yspeed);
     }
 
+    // increase the number of strokes for current level
     lvlStrokes++;
 }
 
 ColliderCheck = function(ball, obj) {
     
+    // define collision points for the ball
     var ballXRight = Math.round(ball.x) + ball.rad;
     var ballXLeft = Math.round(ball.x) - ball.rad;
     var ballYBottom = Math.round(ball.y) + ball.rad;
     var ballYTop = Math.round(ball.y) - ball.rad;
 
+    // check for collision
     if (ballXRight > obj.x && ballXLeft < obj.x + obj.width && ballYBottom > obj.y && ballYTop < obj.y + obj.height) {
 
         var side;
 
+        // determine in which angular quadrant the ball is colliding with the wall
         var deg = Math.atan2(ball.xVel, ball.yVel) * 180 / Math.PI;
 
+        // determine which side of the wall the ball is colliding
         if (ballYTop < obj.y + obj.height && ballYBottom > obj.y && (deg > -90 && deg < 90) && obj.width > 5) {
             side = "bottom";
         } else if (ballYTop < obj.y + obj.height && ballYBottom > obj.y && (deg < -90 || deg > 90) && obj.width > 5) {
@@ -46,7 +54,7 @@ ColliderCheck = function(ball, obj) {
             side ="right";
         }
 
-        console.log("Deg: " + deg + "Side: " + side);
+        // set the new velocities depending on angle and side
         if (deg === 0 || deg === 180) {
             ball.yVel = -ball.yVel;
         } else if (deg === -90 || deg === 90) {

@@ -62,6 +62,8 @@ function Draw(objects, gameBall, hole) {
 
 function WinCondition(gameBall, hole) {
     
+    // setup of collision borders of both ball and hole
+
     var gameBallXRight = Math.round(gameBall.x) + gameBall.rad;
     var gameBallXLeft = Math.round(gameBall.x) - gameBall.rad;
     var gameBallYBottom = Math.round(gameBall.y) + gameBall.rad;
@@ -72,19 +74,24 @@ function WinCondition(gameBall, hole) {
     var holeYBottom = Math.round(hole.y) + hole.rad;
     var holeYTop = Math.round(hole.y) - hole.rad;
 
+    // check for collision
     if (gameBallXRight > holeXLeft && gameBallXLeft < holeXRight && gameBallYBottom < holeYBottom && gameBallYTop > holeYTop) {
         
+        // stop the animations
         cancelAnimationFrame(animationRequest);
 
         let levelNum = parseInt(localStorage.getItem("level")) + 1;
+        // Check for the last level
         if (levelNum <= 3) {
             swal("Congratulations!", "You cleared the level!", "success").then(() => {
+                // move on to next level
                 let lvl = "Level_" + (levelNum - 1);
                 localStorage.setItem(lvl, lvlStrokes)
                 localStorage.setItem("level", levelNum);
                 location.reload();
             });
         } else {
+            // load the upload highscore page
             location = "highscore.html";
         }
     }
