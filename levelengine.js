@@ -91,6 +91,9 @@ function WinCondition(gameBall, hole) {
     // check for collision
     if (gameBallXRight > holeXLeft && gameBallXLeft < holeXRight && gameBallYBottom < holeYBottom && gameBallYTop > holeYTop) {
         
+        let audio = new Audio("Assets/Sounds/success.wav");
+        audio.play();
+
         // stop the animations
         cancelAnimationFrame(animationRequest);
 

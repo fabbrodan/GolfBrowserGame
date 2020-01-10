@@ -1,4 +1,5 @@
 var levelObjects = [];
+var backgrounds = [];
 
 function InitLevel() {
     

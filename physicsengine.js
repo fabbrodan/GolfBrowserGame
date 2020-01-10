@@ -1,5 +1,9 @@
 function BallHit(clickedX, releaseX, clickedY, releaseY) {
 
+    let audio = new Audio("Assets/Sounds/ball_hit.wav");
+    audio.volume = 0.5;
+    audio.play();
+
     // find the higs and lows of X and Y positions of click
     var highX = Math.max(clickedX, releaseX);
     var highY = Math.max(clickedY, releaseY);
@@ -37,6 +41,9 @@ ColliderCheck = function(ball, obj) {
 
     // check for collision
     if (ballXRight > obj.x && ballXLeft < obj.x + obj.width && ballYBottom > obj.y && ballYTop < obj.y + obj.height) {
+
+        let audio = new Audio("Assets/Sounds/hit_wall.wav");
+        audio.play();
 
         var side;
 
