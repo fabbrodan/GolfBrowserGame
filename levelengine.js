@@ -97,20 +97,20 @@ function WinCondition(gameBall, hole) {
         // stop the animations
         cancelAnimationFrame(animationRequest);
 
-        let levelNum = parseInt(localStorage.getItem("level")) + 1;
+        let levelNum = parseInt(sessionStorage.getItem("level")) + 1;
         // Check for the last level
         if (levelNum <= 3) {
             swal("Congratulations!", "You cleared the level!", "success").then(() => {
                 // move on to next level and update total strokes
-                if (localStorage.getItem("strokes") == null) {
-                    localStorage.setItem("strokes", lvlStrokes);
+                if (sessionStorage.getItem("strokes") == null) {
+                    sessionStorage.setItem("strokes", lvlStrokes);
                 }
                 else {
-                    var totalstrokes = parseInt(localStorage.getItem("strokes"));
+                    var totalstrokes = parseInt(sessionStorage.getItem("strokes"));
                     totalstrokes += lvlStrokes;
-                    localStorage.setItem("strokes", totalstrokes)
+                    sessionStorage.setItem("strokes", totalstrokes)
                 }
-                localStorage.setItem("level", levelNum);
+                sessionStorage.setItem("level", levelNum);
                 location.reload();
             });
         } else {

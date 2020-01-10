@@ -23,16 +23,11 @@ $("document").ready(function() {
     include("physicsengine.js", "physeng");
     //include("levelengine.js", "leveleng");
     //include("scoresys.js", "scoresys");
-    if (localStorage.getItem("level") === null) {
-        localStorage.setItem("level", 1);
+    if (sessionStorage.getItem("level") === null) {
+        sessionStorage.setItem("level", 1);
     }
-    include("Levels/level_" + localStorage.getItem("level") + ".js", "level");
+    include("Levels/level_" + sessionStorage.getItem("level") + ".js", "level");
 
-    highScores = GetHighScores();
-    $.each(highScores, function(index, object) {
-        var row = $("<p></p>").text(object.name + " - " + object.score);
-        $("#scoreDiv").append(row);
-    });
     InitContext();
     var footer = $("<footer></footer>");
     var counter = $("<h1></h1>");
@@ -77,6 +72,8 @@ $("document").ready(function() {
         console.log(event.changedTouches[0].pageX);
     });
     */
+
+    GetHighScores();
 
     FrameRenderLoop(50);
 });

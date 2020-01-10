@@ -30,6 +30,9 @@ function GetHighScores() {
             highScores.push(snap.val());
         });
     });
+    
+    var name = highScores["name"];
+    var score = highScores["score"];
+
     console.log(highScores);
-    return highScores;
 }
