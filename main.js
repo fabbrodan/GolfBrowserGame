@@ -32,7 +32,7 @@ $("document").ready(function() {
     var footer = $("<footer></footer>");
     var counter = $("<h1></h1>");
     footer.append(counter);
-    $("#scoreDiv").append(footer);
+    $("#pointDiv").append(footer);
 
     level = InitLevel();
 
