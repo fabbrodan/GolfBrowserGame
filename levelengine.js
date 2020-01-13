@@ -68,25 +68,21 @@ function Draw(objects, gameBall, hole) {
         context.stroke();
         context.closePath();
 
-        $("h1").text(lvlStrokes);
+        $("#lvlStroke").text("Strokes: " + lvlStrokes);
+        $("#totalStroke").text("Total: " + (sessionStorage.getItem("strokes") == null ? 0 : sessionStorage.getItem("strokes")));
 }
 
 function WinCondition(gameBall, hole) {
     
     // setup of collision borders of both ball and hole
 
-    var gameBallXRight = Math.round(gameBall.x) + gameBall.rad;
-    var gameBallXLeft = Math.round(gameBall.x) - gameBall.rad;
-    var gameBallYBottom = Math.round(gameBall.y) + gameBall.rad;
-    var gameBallYTop = Math.round(gameBall.y) - gameBall.rad;
+    var distX = gameBall.x - hole.x;
+    var distY = gameBall.y - hole.y;
 
-    var holeXRight = Math.round(hole.x) + hole.rad;
-    var holeXLeft = Math.round(hole.x) - hole.rad;
-    var holeYBottom = Math.round(hole.y) + hole.rad;
-    var holeYTop = Math.round(hole.y) - hole.rad;
+    var distance = Math.sqrt(distX * distX + distY * distY);
 
     // check for collision
-    if (gameBallXRight > holeXLeft && gameBallXLeft < holeXRight && gameBallYBottom < holeYBottom && gameBallYTop > holeYTop) {
+    if ((distance * 1.85) < gameBall.rad + hole.rad) {
         
         let audio = new Audio("Assets/Sounds/success.wav");
         audio.play();

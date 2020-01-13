@@ -29,10 +29,10 @@ $("document").ready(function() {
     include("Levels/level_" + sessionStorage.getItem("level") + ".js", "level");
 
     InitContext();
-    var footer = $("<footer></footer>");
-    var counter = $("<h1></h1>");
-    footer.append(counter);
-    $("#pointDiv").append(footer);
+    var counter = $("<h1></h1>").attr("id", "lvlStroke");
+    var totalCounter = $("<h1></h1>").attr("id", "totalStroke");
+    $("#pointDiv").append(counter);
+    $("#pointDiv").append(totalCounter);
 
     level = InitLevel();
 
