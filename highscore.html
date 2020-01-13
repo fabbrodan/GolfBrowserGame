@@ -12,11 +12,18 @@
         <script src="scoresys.js"></script>
     </head>
     <body>
-        <div id="main">
+        <div id="main">    
             <h1>Congratulations! You completed all the levels!</h1>
             <h2>Would you like to upload your score?</h2>
-            <input type="button" value="Yes"/>
+            <input type="button" value="Yes" onclick="loadSubmitForm()"/>
             <input type="button" value="No"/>
+        </div>
+        <div id="myModal" class="modal">
+            <span id="modalClose" class="close">&times;</span>
+            <form id="scoreForm" class="modal-content">
+                <input type="text" name="hsName"/>
+                <input type="submit" value="Submit"/>
+            </form>
         </div>
     </body>
 </html>

@@ -1,3 +1,19 @@
+$("document").ready(function() {
+
+    $("#scoreForm").submit(function(event) {
+        event.preventDefault();
+        let inputs = $("#scoreForm").find(":input");
+        let name = inputs[0].value;
+        SubmitScore(name).then(() => {
+            sessionStorage.removeItem("strokes");
+            sessionStorage.removeItem("level");
+            location = "index.html";
+        }
+        );
+    });
+
+});
+
 var firebaseConfig = {
     apiKey: "AIzaSyB3UtHiVvXhHhPzjTYssFK5ZaNIRh7w3zk",
     authDomain: "minigolfgame-42068.firebaseapp.com",
@@ -12,12 +28,16 @@ var fb = firebase.initializeApp(firebaseConfig);
 
 var database = fb.database();
 
+function loadSubmitForm() {
+    $(".modal").css("display", "block");
+}
+
 async function SubmitScore(userName) {
     var entries = database.ref("/entries/");
     var newEntry = entries.push();
     await newEntry.set({
         name: userName,
-        score: Number(localStorage.getItem("strokes"))
+        score: Number(sessionStorage.getItem("strokes"))
     });
 
     localStorage.removeItem("strokes");
