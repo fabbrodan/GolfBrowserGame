@@ -5,9 +5,6 @@ var height;
 
 function InitContext() {
 
-    //width = window.innerWidth || window.document.documentElement.clientWidth || window.document.documentElement.getElementsByTagName('body')[0].clientWidth * 0.25;
-    //height = window.innerHeight || window.document.documentElement.clientHeight || window.document.documentElement.getElementsByTagName('body')[0].clientHeight * 0.25;
-
     width = window.innerWidth * 0.80;
     height = window.innerHeight * 0.80;
 

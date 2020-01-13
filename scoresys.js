@@ -24,15 +24,11 @@ async function SubmitScore(userName) {
 }
 
 function GetHighScores() {
-    var highScores = [];
+    
     database.ref("/entries/").once('value').then(function(snapshot) {
         snapshot.forEach(function(snap) {
-            highScores.push(snap.val());
+            var entry = $("<p></p>").text(snap.val().name + " - " + snap.val().score);
+            $("#scoreDiv").append(entry);
         });
     });
-    
-    var name = highScores["name"];
-    var score = highScores["score"];
-
-    console.log(highScores);
 }
