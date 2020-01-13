@@ -17,7 +17,7 @@ async function SubmitScore(userName) {
     var newEntry = entries.push();
     await newEntry.set({
         name: userName,
-        score: localStorage.getItem("strokes")
+        score: Number(localStorage.getItem("strokes"))
     });
 
     localStorage.removeItem("strokes");
