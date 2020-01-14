@@ -1,5 +1,9 @@
 $("document").ready(function() {
 
+    $("#modalClose").click(function() {
+        $("#myModal").css("display", "none");
+    });
+
     // Bind submit event
     $("#scoreForm").submit(function(event) {
         event.preventDefault();
@@ -11,7 +15,6 @@ $("document").ready(function() {
             }
         );
     });
-
 });
 
 // Setup firebase
@@ -31,6 +34,12 @@ var database = fb.database();
 
 function loadSubmitForm() {
     $(".modal").css("display", "block");
+}
+
+function returnHome() {
+    sessionStorage.removeItem("strokes");
+    sessionStorage.removeItem("level");
+    location = "index.html";
 }
 
 async function SubmitScore(userName) {

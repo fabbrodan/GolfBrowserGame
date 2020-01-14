@@ -5,8 +5,8 @@ var height;
 
 function InitContext() {
 
-    width = window.innerWidth * 0.80;
-    height = window.innerHeight * 0.80;
+    width = $("#gameDiv").width();
+    height = $("#gameDiv").height();
 
     canvas = document.createElement("canvas");
     canvas.width = width ;
@@ -91,10 +91,11 @@ function WinCondition(gameBall, hole) {
         cancelAnimationFrame(animationRequest);
 
         let levelNum = parseInt(sessionStorage.getItem("level")) + 1;
-        // Check for the last level
-        if (levelNum <= 3) {
+        
             swal("Congratulations!", "You cleared the level!", "success").then(() => {
-                // move on to next level and update total strokes
+                // Check for the last level
+                if (levelNum <= 3) {
+                    // move on to next level and update total strokes
                 if (sessionStorage.getItem("strokes") == null) {
                     sessionStorage.setItem("strokes", lvlStrokes);
                 }
@@ -105,10 +106,10 @@ function WinCondition(gameBall, hole) {
                 }
                 sessionStorage.setItem("level", levelNum);
                 location.reload();
-            });
         } else {
             // load the upload highscore page
             location = "highscore.html";
-        }
+            }
+        });
     }
 }

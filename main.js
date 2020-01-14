@@ -12,6 +12,9 @@ var clickedY;
 var releaseX;
 var releaseY;
 
+var canvasOffsetX; 
+var canvasOffsetY;
+
 var lvlStrokes = 0;
 
 var animationRequest;
@@ -36,10 +39,13 @@ $("document").ready(function() {
 
     level = InitLevel();
 
+    canvasOffsetX = $("canvas").offset().left;
+    canvasOffsetY = $("canvas").offset().top;
+
     // define the initial points for force calculation
     $("canvas").mousedown(function(event) {
-        var localclickedX = event.originalEvent.clientX;
-        var localclickedY = event.originalEvent.clientY;
+        var localclickedX = event.originalEvent.clientX - canvasOffsetX;
+        var localclickedY = event.originalEvent.clientY - canvasOffsetY;
 
         if ((localclickedX >= gameBall.x - (gameBall.rad * 2)) && (localclickedX <= gameBall.x + (gameBall.rad * 2))
         && (localclickedY >= gameBall.y - (gameBall.rad * 2)) && (localclickedY <= gameBall.y + (gameBall.rad * 2))) {
@@ -55,8 +61,8 @@ $("document").ready(function() {
     // define the end points for force calculation
     $("canvas").mouseup(function(event) {
         if (clickedX != null && clickedY != null) {
-            releaseX = event.originalEvent.clientX;
-            releaseY = event.originalEvent.clientY;
+            releaseX = event.originalEvent.clientX - canvasOffsetX;
+            releaseY = event.originalEvent.clientY - canvasOffsetY;
             BallHit(clickedX, releaseX, clickedY, releaseY);
         }
 
