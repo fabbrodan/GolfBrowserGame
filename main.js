@@ -39,11 +39,13 @@ $("document").ready(function() {
 
     level = InitLevel();
 
+    // get the offset of canvas for correct mouse point calculation
     canvasOffsetX = $("canvas").offset().left;
     canvasOffsetY = $("canvas").offset().top;
 
     // define the initial points for force calculation
     $("canvas").mousedown(function(event) {
+        // get the point of the mouse on the canvas based off of the offset
         var localclickedX = event.originalEvent.clientX - canvasOffsetX;
         var localclickedY = event.originalEvent.clientY - canvasOffsetY;
 
@@ -61,6 +63,7 @@ $("document").ready(function() {
     // define the end points for force calculation
     $("canvas").mouseup(function(event) {
         if (clickedX != null && clickedY != null) {
+            // get the point of mouse release based off of the canvas offset
             releaseX = event.originalEvent.clientX - canvasOffsetX;
             releaseY = event.originalEvent.clientY - canvasOffsetY;
             BallHit(clickedX, releaseX, clickedY, releaseY);
@@ -68,16 +71,6 @@ $("document").ready(function() {
 
         document.body.style.cursor = "default";
     });
-
-    /* TRYING TO SETUP TOUCH DEVICES
-    canvas.addEventListener("touchstart", function(event) {
-        console.log(event.touches[0].clientX + " " + event.touches[0].clientY);
-    });
-
-    canvas.addEventListener("touchend", function(event) {
-        console.log(event.changedTouches[0].pageX);
-    });
-    */
 
     GetHighScores();
 

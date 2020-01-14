@@ -55,7 +55,7 @@ async function SubmitScore(userName) {
         score: Number(sessionStorage.getItem("strokes"))
     });
 
-    localStorage.removeItem("strokes");
+    sessionStorage.removeItem("strokes");
 }
 
 function GetHighScores() {
