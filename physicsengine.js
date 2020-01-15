@@ -41,7 +41,7 @@ ColliderCheck = function(ball, obj) {
 
     // check for collision
     if (ballXRight > obj.x && ballXLeft < obj.x + obj.width && ballYBottom > obj.y && ballYTop < obj.y + obj.height) {
-        
+
         if (ball.xVel != 0 && ball.yVel != 0) {
             let audio = new Audio("Assets/Sounds/hit_wall.wav");
             audio.play();
@@ -84,6 +84,11 @@ ColliderCheck = function(ball, obj) {
             ball.yVel = -ball.yVel;
         } else if ((deg < -90) && side === "left") {
             ball.xVel = -ball.xVel;
+        }
+
+        if (obj instanceof(PhysObj) && (Math.round(ball.xVel) == 0) && (Math.round(ball.yVel == 0)))  {
+            ball.x += obj.xVel;
+            ball.y += obj.yVel;
         }
     }
 }
@@ -144,8 +149,11 @@ var PhysObj = function(x, y, w, h) {
     this.height = h;
     this.width = w;
 
-    this.xVel = 0.5;
-    this.yVel = 0.5;
+    this.xVel = 0;
+    this.yVel = 0;
+
+    this.movementPattern = {ticks: 0, Xspeed: 0, Yspeed: 0};
+    this.currentTick = 0;
 
     this.addXVel = function(vel) {
         this.xVel += vel;
@@ -161,27 +169,22 @@ var PhysObj = function(x, y, w, h) {
     }
 
     this.nextFrame = function() {
-        this.x += this.xVel;
-        this.y += this.yVel;
 
-        for (var i = 0; i < level.length; i++) {
-                ColliderCheck(this, level[i]);
-            }
+    if (this.currentTick < this.movementPattern.ticks / 2) {
+            this.xVel = this.movementPattern.Xspeed;
+            this.yVel = this.movementPattern.Yspeed;
+        }
+    else {
+            this.xVel = -this.movementPattern.Xspeed;
+            this.yVel = -this.movementPattern.Yspeed;
+        }
+            this.x += this.xVel;
+            this.y += this.yVel;
 
-        if (this.xVel > 0.1 || this.xVel < -0.1) {
-            this.xVel = (this.xVel * 0.9);
-        }
-        else {
-            this.xVel = 0;
-            collision = false;
-        }
-
-        if (this.yVel > 0.1 || this.yVel < -0.1) {
-            this.yVel = (this.yVel * 0.9);
-        }
-        else {
-            this.yVel = 0;
-            collision = false;
+        if (this.currentTick < this.movementPattern.ticks) {
+            this.currentTick++;
+        } else {
+            this.currentTick = 0;
         }
     }
 }

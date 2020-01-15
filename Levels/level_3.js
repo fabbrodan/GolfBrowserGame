@@ -1,5 +1,6 @@
 var levelObjects = [];
 var backgrounds = [];
+var movement;
 
 function InitLevel() {
     

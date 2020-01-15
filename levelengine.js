@@ -51,6 +51,9 @@ function Draw(objects, gameBall, hole) {
                 object.width,
                 object.height
             );
+            if (object instanceof(PhysObj)) {
+                object.nextFrame();
+            }
         });
 
     // draw the ball
@@ -112,7 +115,7 @@ function WinCondition(gameBall, hole) {
             swal("Congratulations!", "You cleared the level!", "success").then(() => {
                 
                 // Check for the last level
-            if (levelNum <= 3) {
+            if (levelNum <= 4) {
                     // if session storage does not contain stroke, assign it;
                 if (sessionStorage.getItem("strokes") == null) {
                     sessionStorage.setItem("strokes", lvlStrokes);
@@ -128,6 +131,11 @@ function WinCondition(gameBall, hole) {
                 // reload page and let main script handle the next level drawing
                 location.reload();
         } else {
+
+            var totalstrokes = parseInt(sessionStorage.getItem("strokes"));
+            totalstrokes += lvlStrokes;
+            sessionStorage.setItem("strokes", totalstrokes)
+
             // if last level was cleared, load the upload highscore page
             location = "highscore.html";
             }

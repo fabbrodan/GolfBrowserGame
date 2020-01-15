@@ -1,5 +1,7 @@
 var levelObjects = [];
 var backgrounds = [];
+var movement;
+
 function InitLevel() {
     
     gameBall = new CircleObj(445, 100, 5, false);
