@@ -12,12 +12,14 @@
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+        <!--REMOVE THESE SCRIPTS AND USE THE INCLUDE FUNTIONS IN main.js INSTEAD FOR PRODUCTION-->
         <script src="levelengine.js"></script>
         <script src="scoresys.js"></script>
+        <script src="physicsengine.js"></script>
     </head>
     <body>
         <div class="container-fluid">
-            <div class="row no-gutters" style="height: 100%;">
+            <div class="row">
                 <div class="col-lg-6 col-md-10 col-sm-12" id="gameDiv">
                 </div>
                 <div class="col-lg-3 col-md-2 col-sm-6" id="pointDiv">
@@ -26,6 +28,7 @@
                     <h2>High Scores</h2>
                 </div>
             </div>
+
         </div>
     </body>
 </html>

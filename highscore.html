@@ -4,8 +4,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
               integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -18,14 +16,14 @@
     <div class="container-fluid">
         <row>
             <div id="highScoreMain">
-                <h1>Congratulations! You completed all the levels!</h1>
+                <h1 id ="congratsHeader"></h1>
                 <h2>Would you like to upload your score?</h2>
-                <input type="button" value="Yes" onclick="loadSubmitForm()"/>
-                <input type="button" value="No" onclick="returnHome()"/>
+                <input id="submitYes" type="button" value="Yes"/>
+                <input id="submitNo" type="button" value="No"/>
             </div>
         </row>
         <row>
-            <div id="myModal" class="modal col-lg-2 offset-lg-5">
+            <div id="myModal" class="modal col-lg-2 offset-lg-5 col-md-2 offset-md-5 col-sm-2 offset-sm-5">
                 <span id="modalClose" class="close">&times;</span>
                 <div class="modal-content">
                     <form id="scoreForm">
