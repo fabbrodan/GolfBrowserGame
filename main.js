@@ -25,9 +25,9 @@ var animationRequest;
 $("document").ready(function() {
 
     /* UNCOMMENT TO INCLUDE SCRIPT FILES HERE INSTEAD OF IN HTML AND REMOVE FROM HTML HEAD SECTION */
-    //include("physicsengine.js", "physeng");
-    //include("levelengine.js", "leveleng");
-    //include("scoresys.js", "scoresys");
+    include("physicsengine.js", "physeng");
+    include("levelengine.js", "leveleng");
+    include("scoresys.js", "scoresys");
     if (sessionStorage.getItem("level") === null) {
         sessionStorage.setItem("level", 1);
     }
