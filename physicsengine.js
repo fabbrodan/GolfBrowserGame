@@ -86,6 +86,7 @@ ColliderCheck = function(ball, obj) {
             ball.xVel = -ball.xVel;
         }
 
+        // make sure that a moving level object pushes the ball once the ball is stationary
         if (obj instanceof(PhysObj) && (Math.round(ball.xVel) == 0) && (Math.round(ball.yVel == 0)))  {
             ball.x += obj.xVel;
             ball.y += obj.yVel;
@@ -96,7 +97,11 @@ ColliderCheck = function(ball, obj) {
 var CircleObj = function(x, y, r) {
     this.x = x,
     this.y = y;
+
+    //radius of circle
     this.rad = r;
+
+    // start and end angles, should always be kept as is to form a full circle
     this.sAngle = 0;
     this.eAngle = 360
 
@@ -144,15 +149,26 @@ var CircleObj = function(x, y, r) {
 }
 
 var PhysObj = function(x, y, w, h) {
+    
+    // X position of object
     this.x = x;
+    
+    // Y position of object
     this.y = y;
+
+    // height of object
     this.height = h;
+
+    // width of object
     this.width = w;
 
+    // initial velocities - cannot be null or they will not be rendered!
     this.xVel = 0;
     this.yVel = 0;
 
+    // movement pattern object initialization - cannot be null or the draw methods will throw errors
     this.movementPattern = {ticks: 0, Xspeed: 0, Yspeed: 0};
+    // variable to keep track of movement pattern status
     this.currentTick = 0;
 
     this.addXVel = function(vel) {
@@ -170,17 +186,23 @@ var PhysObj = function(x, y, w, h) {
 
     this.nextFrame = function() {
 
-    if (this.currentTick < this.movementPattern.ticks / 2) {
-            this.xVel = this.movementPattern.Xspeed;
-            this.yVel = this.movementPattern.Yspeed;
-        }
-    else {
-            this.xVel = -this.movementPattern.Xspeed;
-            this.yVel = -this.movementPattern.Yspeed;
-        }
-            this.x += this.xVel;
-            this.y += this.yVel;
+        // check which tick in movement pattern we are in
+        if (this.currentTick < this.movementPattern.ticks / 2) {
+            // if we are in first half, set the objects movement speed accordingly
+                this.xVel = this.movementPattern.Xspeed;
+                this.yVel = this.movementPattern.Yspeed;
+            }
+        else {
+            // if we are in second half reverse the movement speed
+                this.xVel = -this.movementPattern.Xspeed;
+                this.yVel = -this.movementPattern.Yspeed;
+            }
 
+        // move object
+        this.x += this.xVel;
+        this.y += this.yVel;
+
+        // check current game tick of movement pattern and update
         if (this.currentTick < this.movementPattern.ticks) {
             this.currentTick++;
         } else {

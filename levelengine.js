@@ -51,6 +51,7 @@ function Draw(objects, gameBall, hole) {
                 object.width,
                 object.height
             );
+            // if the obstacle/wall is a moving object, call it's nextFrame function to update position
             if (object instanceof(PhysObj)) {
                 object.nextFrame();
             }
