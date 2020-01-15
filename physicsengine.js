@@ -41,9 +41,11 @@ ColliderCheck = function(ball, obj) {
 
     // check for collision
     if (ballXRight > obj.x && ballXLeft < obj.x + obj.width && ballYBottom > obj.y && ballYTop < obj.y + obj.height) {
-
-        let audio = new Audio("Assets/Sounds/hit_wall.wav");
-        audio.play();
+        
+        if (ball.xVel != 0 && ball.yVel != 0) {
+            let audio = new Audio("Assets/Sounds/hit_wall.wav");
+            audio.play();
+        }
 
         var side;
 

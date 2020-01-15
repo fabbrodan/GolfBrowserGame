@@ -3,8 +3,7 @@ html, body {
 }
 
 .container, .container-fluid {
-    height: 100%;
-    overflow-y: hidden;
+    height: inherit;
 }
 
 div {
@@ -14,7 +13,7 @@ div {
 #scoreDiv {
     border: solid 2px black;
     padding: 5px;
-    height: 33%;
+    height: 50%;
 }
 
 .modal {
