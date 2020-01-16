@@ -6,9 +6,22 @@ html, body {
     height: inherit;
 }
 
+.row-sm {
+    height: 25%;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.inline {
+    display: inline-block;
+}
+
+/*
 .row {
     height: inherit;
-}
+} */
 
 div {
     vertical-align: top;
@@ -54,4 +67,13 @@ div {
     background-image:url("Assets/Images/colorful-fan-firework-gif.gif");
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+#gameDiv {
+    left: 10px;
+    height: 500px;
+}
+
+canvas {
+    box-shadow: black 0px 0px 10px;
 }

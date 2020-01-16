@@ -33,7 +33,7 @@ $("document").ready(function() {
     }
     include("Levels/level_" + sessionStorage.getItem("level") + ".js", "level");
 
-    levelOffsetX = -100;
+    levelOffsetX = -175;
     levelOffsetY = 100;
 
     InitContext(levelOffsetX, levelOffsetY);
