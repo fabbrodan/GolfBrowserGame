@@ -64,7 +64,7 @@ div {
     border: 2px solid black;
     z-index:1;
     padding: 15px;
-    top: 35%;
+    top: 25%;
     width:300px;
     height:200px;
     overflow:hidden;
@@ -88,9 +88,12 @@ div {
     width: 100%;
     height:100%;
     top: 5%;
+}
+
+#highScore-bg {
     background-image:url("Assets/Images/colorful-fan-firework-gif.gif");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100%;
 }
 
 #gameDiv {
