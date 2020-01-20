@@ -32,6 +32,7 @@ caption {
     caption-side: top;
     font-weight: bolder;
     text-decoration: underline;
+    color: black;
 }
 col {
     width: 120px;
