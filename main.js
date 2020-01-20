@@ -80,6 +80,16 @@ $("document").ready(function() {
         document.body.style.cursor = "default";
     });
 
+    $("canvas").mouseleave(function(event) {
+        document.body.style.cursor = "default";
+    });
+
+    $("#resetBtn").click(function() {
+        sessionStorage.setItem("level", 1);
+        sessionStorage.setItem("strokes", 0);
+        location.reload();
+    });
+
     // fetch and display the highscore
     GetHighScores();
 

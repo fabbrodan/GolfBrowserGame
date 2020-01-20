@@ -10,6 +10,15 @@ html, body {
     height: 25%;
 }
 
+.row-xs {
+    height: 5%;
+}
+
+.row {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .align-center {
     text-align: center;
 }
@@ -18,20 +27,26 @@ html, body {
     display: inline-block;
 }
 
-/*
-.row {
-    height: inherit;
-} */
+caption {
+    caption-side: top;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+col {
+    width: 120px;
+}
 
 div {
     vertical-align: top;
 }
 
 #scoreDiv {
-    border: solid 2px black;
+    box-shadow: 0px 0px 10px;
+    right: 20px;
     padding: 5px;
     height: 50%;
     min-height: 275px;
+    text-align: center;
 }
 
 .modal {
