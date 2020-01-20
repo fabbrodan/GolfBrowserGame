@@ -33,7 +33,7 @@ $("document").ready(function() {
     }
     include("Levels/level_" + sessionStorage.getItem("level") + ".js", "level");
 
-    levelOffsetX = -100;
+    levelOffsetX = -175;
     levelOffsetY = 100;
 
     InitContext(levelOffsetX, levelOffsetY);
@@ -42,8 +42,8 @@ $("document").ready(function() {
     canvasOffsetX = $("canvas").offset().left;
     canvasOffsetY = $("canvas").offset().top;
 
-    var counter = $("<h1></h1>").attr("id", "lvlStroke");
-    var totalCounter = $("<h1></h1>").attr("id", "totalStroke");
+    var counter = $("<h3></h3>").attr("id", "lvlStroke");
+    var totalCounter = $("<h3></h3>").attr("id", "totalStroke");
     $("#pointDiv").append(counter);
     $("#pointDiv").append(totalCounter);
 
@@ -78,6 +78,16 @@ $("document").ready(function() {
         }
 
         document.body.style.cursor = "default";
+    });
+
+    $("canvas").mouseleave(function(event) {
+        document.body.style.cursor = "default";
+    });
+
+    $("#resetBtn").click(function() {
+        sessionStorage.setItem("level", 1);
+        sessionStorage.setItem("strokes", 0);
+        location.reload();
     });
 
     // fetch and display the highscore

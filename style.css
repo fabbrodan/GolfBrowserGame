@@ -1,13 +1,40 @@
 html, body {
     height: 100%;
+    text-shadow: 2px 2px 2px darkgray;
 }
 
 .container, .container-fluid {
     height: inherit;
 }
 
+.row-sm {
+    height: 25%;
+}
+
+.row-xs {
+    height: 5%;
+}
+
 .row {
-    height: inherit;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.inline {
+    display: inline-block;
+}
+
+caption {
+    caption-side: top;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+col {
+    width: 120px;
 }
 
 div {
@@ -15,10 +42,20 @@ div {
 }
 
 #scoreDiv {
-    border: solid 2px black;
+    box-shadow: 0px 0px 10px;
+    right: 20px;
     padding: 5px;
     height: 50%;
     min-height: 275px;
+    text-align: center;
+}
+
+#scoreDiv tr {
+    text-align:left;
+}
+
+#resetRow {
+    margin-bottom: 20px;
 }
 
 .modal {
@@ -54,4 +91,29 @@ div {
     background-image:url("Assets/Images/colorful-fan-firework-gif.gif");
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+#gameDiv {
+    left: 10px;
+    height: 500px;
+}
+
+canvas {
+    box-shadow: black 0px 0px 10px;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    border: 2px solid black;
+    border-radius: 5px;
+    top: -15px;
+    background-color: rgba(61, 59, 59, 0.356);
+}
+
+#resetButtonDiv:hover + .tooltip-text{
+    visibility: visible;    
+}
+
+.yesnoBtn {
+    width: 5%;
 }

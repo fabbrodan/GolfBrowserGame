@@ -77,9 +77,13 @@ function GetHighScores() {
         // loop through all entries
         snapshot.forEach(function(snap) {
             // setup new paragraphs and assign it's text from the database
-            var entry = $("<p></p>").text(snap.val().name + " - " + snap.val().score);
+            var entry = $("<tr></tr>");
+            var nameCell = $("<td></td>").text(snap.val().name);
+            var scoreCell = $("<td></td>").text(snap.val().score);
+            entry.append(nameCell);
+            entry.append(scoreCell);
             // append p tag to the div
-            $("#scoreDiv").append(entry);
+            $("tbody").append(entry);
         });
     });
 }
