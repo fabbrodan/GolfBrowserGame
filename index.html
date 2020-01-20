@@ -16,13 +16,22 @@
     <body>
         <div class="container-fluid">
             <div class="row row-sm">
-                <h1 class="align-center col-lg-12 col-md-12 col-sm-12">Welcome to the Golf Game!</h1>
+                <div class="align-center col-lg-12 col-md-12 col-sm-12">
+                    <h1>Welcome to the Golf Game!</h1>
+                </div>
+                <div class="align-center col-lg-12 col-md-12 col-sm-12">
+                    <h4>Get the white ball into the black hole!</h4>
+                    <h5>Lowest number of strokes earns the top position on the leaderboard.</h5>
+                </div>
                 <div class="col-lg-3 col-md-2 col-sm-6" id="pointDiv">
                 </div>
             </div>
             <div class="row row-xs" id="resetRow">
-                <div class="col-lg-1 col-md-3 col-sm-6 col-xs-12">
-                    <input class="btn" type="button" id="resetBtn" value="Restart"/>
+                <div class="col-lg-1 col-md-3 col-sm-6 col-xs-12" id="resetButtonDiv">
+                    <input class="btn btn-secondary" type="button" id="resetBtn" value="Restart game"/>
+                </div>
+                <div class="tooltip-text col-lg-4">
+                    <p>Restarts the game from the start, resetting both your level progress and stroke count.</p>
                 </div>
             </div>
             <div class="row">
@@ -32,11 +41,11 @@
                     <table>
                         <col>
                         <col>
-                        <caption>High Scores</caption>
+                        <caption>Leaderboard</caption>
                         <thead>
                             <tr id="highScoreTblHeaderRow">
                                 <th>Name:</th>
-                                <th>Score:</th>
+                                <th>Strokes:</th>
                             </tr>
                         </thead>
                         <tbody>

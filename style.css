@@ -1,5 +1,6 @@
 html, body {
     height: 100%;
+    text-shadow: 2px 2px 2px darkgray;
 }
 
 .container, .container-fluid {
@@ -99,4 +100,20 @@ div {
 
 canvas {
     box-shadow: black 0px 0px 10px;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    border: 2px solid black;
+    border-radius: 5px;
+    top: -15px;
+    background-color: rgba(61, 59, 59, 0.356);
+}
+
+#resetButtonDiv:hover + .tooltip-text{
+    visibility: visible;    
+}
+
+.yesnoBtn {
+    width: 5%;
 }
