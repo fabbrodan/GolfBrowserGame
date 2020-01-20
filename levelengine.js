@@ -17,6 +17,7 @@ function InitContext(xOffset, yOffset) {
     canvas = document.createElement("canvas");
     canvas.width = width ;
     canvas.height = height;
+    canvas.offsetLeft = 5;
 
     // assign offset values
     XOffset = xOffset;

@@ -33,7 +33,7 @@ $("document").ready(function() {
     }
     include("Levels/level_" + sessionStorage.getItem("level") + ".js", "level");
 
-    levelOffsetX = -100;
+    levelOffsetX = -175;
     levelOffsetY = 100;
 
     InitContext(levelOffsetX, levelOffsetY);
@@ -78,6 +78,16 @@ $("document").ready(function() {
         }
 
         document.body.style.cursor = "default";
+    });
+
+    $("canvas").mouseleave(function(event) {
+        document.body.style.cursor = "default";
+    });
+
+    $("#resetBtn").click(function() {
+        sessionStorage.setItem("level", 1);
+        sessionStorage.setItem("strokes", 0);
+        location.reload();
     });
 
     // fetch and display the highscore
