@@ -49,6 +49,14 @@ div {
     text-align: center;
 }
 
+#scoreDiv tr {
+    text-align:left;
+}
+
+#resetRow {
+    margin-bottom: 20px;
+}
+
 .modal {
     display:none;
     position:fixed;
