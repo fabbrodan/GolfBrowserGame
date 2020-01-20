@@ -42,8 +42,8 @@ $("document").ready(function() {
     canvasOffsetX = $("canvas").offset().left;
     canvasOffsetY = $("canvas").offset().top;
 
-    var counter = $("<h1></h1>").attr("id", "lvlStroke");
-    var totalCounter = $("<h1></h1>").attr("id", "totalStroke");
+    var counter = $("<h3></h3>").attr("id", "lvlStroke");
+    var totalCounter = $("<h3></h3>").attr("id", "totalStroke");
     $("#pointDiv").append(counter);
     $("#pointDiv").append(totalCounter);
 
