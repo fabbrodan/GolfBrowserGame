@@ -72,18 +72,20 @@ async function SubmitScore(userName) {
 // function to retrieve and display top 5 high scores
 function GetHighScores() {
 
+    var index = 1;
     // retrive all the top 5 scores
     database.ref("/entries/").orderByChild('score').limitToFirst(5).once('value').then(function(snapshot) {
         // loop through all entries
         snapshot.forEach(function(snap) {
             // setup new paragraphs and assign it's text from the database
             var entry = $("<tr></tr>");
-            var nameCell = $("<td></td>").text(snap.val().name);
+            var nameCell = $("<td></td>").text(index + " - " + snap.val().name);
             var scoreCell = $("<td></td>").text(snap.val().score);
             entry.append(nameCell);
             entry.append(scoreCell);
             // append p tag to the div
             $("tbody").append(entry);
+            index++;
         });
     });
 }

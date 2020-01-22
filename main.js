@@ -28,9 +28,11 @@ $("document").ready(function() {
     include("physicsengine.js", "physeng");
     include("levelengine.js", "leveleng");
     include("scoresys.js", "scoresys");
+
     if (sessionStorage.getItem("level") === null) {
         sessionStorage.setItem("level", 1);
     }
+    
     include("Levels/level_" + sessionStorage.getItem("level") + ".js", "level");
 
     levelOffsetX = -175;
@@ -48,8 +50,6 @@ $("document").ready(function() {
     $("#pointDiv").append(totalCounter);
 
     level = InitLevel();
-
-    
 
     // define the initial points for force calculation
     $("canvas").mousedown(function(event) {
