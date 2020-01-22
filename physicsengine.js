@@ -108,19 +108,23 @@ var CircleObj = function(x, y, r) {
     this.xVel = 0;
     this.yVel = 0;
 
+    // Adds velocity to X parameter
     this.addXVel = function(vel) {
         this.xVel += vel;
     }
 
+    // Adds velocity to Y Paramater
     this.addYVel = function(vel) {
         this.yVel += vel;
     }
 
+    // Used to supply both X and Y speeds
     this.addXYVel = function(xVel, yVel) {
         this.xVel += xVel;
         this.yVel += yVel;
     }
 
+    // Moves the ball on Y/X axis based on speeds as well as does collision checks
     this.nextFrame = function() {
         this.x += this.xVel;
         this.y += this.yVel;
@@ -152,38 +156,34 @@ var PhysObj = function(x, y, w, h) {
     
     // X position of object
     this.x = x;
-    
     // Y position of object
     this.y = y;
-
     // height of object
     this.height = h;
-
     // width of object
     this.width = w;
-
     // initial velocities - cannot be null or they will not be rendered!
     this.xVel = 0;
     this.yVel = 0;
-
     // movement pattern object initialization - cannot be null or the draw methods will throw errors
     this.movementPattern = {ticks: 0, Xspeed: 0, Yspeed: 0};
     // variable to keep track of movement pattern status
     this.currentTick = 0;
 
+    // Adds velocity to X-axis movement
     this.addXVel = function(vel) {
         this.xVel += vel;
     }
-
+    // Adds velocity to Y-axis movement
     this.addYVel = function(vel) {
         this.yVel += vel;
     }
-
+    // Adds velocity to both X- and Y-axis movement
     this.addXYVel = function(xVel, yVel) {
         this.xVel += xVel;
         this.yVel = yVel;
     }
-
+    // Moves the object according to X/Y speeds along the axises
     this.nextFrame = function() {
 
         // check which tick in movement pattern we are in
