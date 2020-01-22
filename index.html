@@ -14,18 +14,24 @@
         <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
     </head>
     <body>
+        <!--Main container-->
         <div class="container-fluid">
+            <!--Start of the top row containing header text and stroke counter-->
             <div class="row row-sm">
+                <!--Header-->
                 <div class="align-center col-lg-12 col-md-12 col-sm-12">
                     <h1>Welcome to the Golf Game!</h1>
                 </div>
+                <!--Sub header-->
                 <div class="align-center col-lg-12 col-md-12 col-sm-12">
                     <h4>Get the white ball into the black hole!</h4>
                     <h5>Lowest number of strokes earns the top position on the leaderboard.</h5>
                 </div>
+                <!--Stroke counter-->
                 <div class="col-lg-3 col-md-2 col-sm-6" id="pointDiv">
                 </div>
             </div>
+            <!--Row for the reset button-->
             <div class="row row-xs" id="resetRow">
                 <div class="col-lg-1 col-md-3 col-sm-6 col-xs-12" id="resetButtonDiv">
                     <input class="btn btn-secondary" type="button" id="resetBtn" value="Restart game"/>
@@ -34,9 +40,12 @@
                     <p>Restarts the game from the start, resetting both your level progress and stroke count.</p>
                 </div>
             </div>
+            <!--Main game row and highscore-->
             <div class="row">
+                <!--Game section-->
                 <div class="col-lg-6 col-md-10 col-sm-12" id="gameDiv">
                 </div>
+                <!--High score section-->
                 <div class="col-lg-4 col-md-10 col-sm-12 offset-lg-2" id="scoreDiv">
                     <table>
                         <col>
